@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 function Header() {
-  const [name, setName] = useState("");
-
+  const { person, setPerson } = useAuth();
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -16,11 +16,11 @@ function Header() {
               Authorization: `Bearer ${token}`,
             },
           });
+          if (response.status === 200) {
+            console.log("oi");
 
-          const person = response.data;
-
-          if (person) {
-            setName(person.name);
+            // Check if the response status is OK
+            setPerson(response.data); // Set the person state with the response data
           }
         } catch (error) {
           console.log(error);
@@ -33,15 +33,15 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setName("");
+    setPerson(undefined);
   };
 
   return (
     <div className="flex justify-around">
       <p>logo</p>
-      {name ? (
+      {person?.name ? (
         <div className="flex gap-4">
-          <p>{name}</p>
+          <p>{person.name}</p>
           <button
             className="bg-blue-400 text-white rounded-md px-4 py-2"
             onClick={handleLogout}

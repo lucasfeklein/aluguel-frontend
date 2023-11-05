@@ -1,22 +1,18 @@
-import axios from "axios";
 import { useState } from "react";
+import { useAuth } from "./AuthContext";
 
 function Login() {
   const [pin, setPin] = useState("");
+  const { handleLogin } = useAuth();
 
-  const handleLogin = async (e: any) => {
-    e.preventDefault();
-
-    const response = await axios.post("http://localhost:3000/auth", {
-      pin,
-    });
-    const { token } = response.data;
-
-    localStorage.setItem("token", token);
-  };
   return (
     <div className="flex justify-center mt-10">
-      <form onSubmit={handleLogin}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin(pin);
+        }}
+      >
         <input
           className="border border-gray-600"
           type="text"
