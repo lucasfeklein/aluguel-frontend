@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [pin, setPin] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();

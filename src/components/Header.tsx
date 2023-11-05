@@ -8,21 +8,27 @@ function Header() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (token) {
-      axios
-        .get("http://localhost:3000/person/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
+    const fetchData = async () => {
+      if (token) {
+        try {
+          const response = await axios.get("http://localhost:3000/person/", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
           const person = response.data;
+
           if (person) {
             setName(person.name);
           }
-        })
-        .catch((error) => console.log(error));
-    }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleLogout = () => {
