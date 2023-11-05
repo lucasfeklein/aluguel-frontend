@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Person = {
@@ -21,8 +21,6 @@ export function AuthProvider({ children }: { children: any }) {
   const [person, setPerson] = useState<Person | undefined>(undefined);
 
   const navigate = useNavigate();
-
-  useEffect(() => {}, []);
 
   const handleLogin = async (pin: string) => {
     const response = await axios.post("http://localhost:3000/auth", {
