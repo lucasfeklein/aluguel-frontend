@@ -17,8 +17,6 @@ function Header() {
             },
           });
           if (response.status === 200) {
-            console.log("oi");
-
             // Check if the response status is OK
             setPerson(response.data); // Set the person state with the response data
           }
