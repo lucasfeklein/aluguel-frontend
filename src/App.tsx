@@ -1,16 +1,15 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-
-function About() {
-  return <div>oi</div>;
-}
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Login from "./components/Login";
 
 function App() {
   return (
-    <Router>
+    <div>
+      <Header />
       <Routes>
-        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
-    </Router>
+    </div>
   );
 }
 
