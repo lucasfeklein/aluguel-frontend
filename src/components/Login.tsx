@@ -10,6 +10,9 @@ function Login() {
     const response = await axios.post("http://localhost:3000/auth", {
       pin,
     });
+    const { token } = response.data;
+
+    localStorage.setItem("token", token);
   };
   return (
     <div className="flex justify-center mt-10">
