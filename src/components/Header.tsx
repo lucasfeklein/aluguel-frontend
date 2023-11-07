@@ -35,10 +35,10 @@ function Header() {
   };
 
   return (
-    <div className="flex justify-around">
+    <div className="flex justify-around items-center">
       <p>logo</p>
       {person?.name ? (
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <p>{person.name}</p>
           <button
             className="bg-blue-400 text-white rounded-md px-4 py-2"
