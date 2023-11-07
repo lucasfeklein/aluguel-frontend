@@ -23,7 +23,7 @@ function Books() {
     getBooks();
   }, []);
 
-  async function handleRent(copyId: string) {
+  async function handleRent(copyId: string, bookId: string) {
     const token = localStorage.getItem("token");
 
     try {
@@ -39,15 +39,19 @@ function Books() {
         if (response.status === 200) {
           setBooks((prevBooks) => {
             return prevBooks?.map((book) => {
-              return {
-                ...book,
-                copies: book.copies.map((copy) => {
-                  if (copy.id === copyId) {
-                    return { ...copy, isRented: true };
-                  }
-                  return copy;
-                }),
-              };
+              if (book.id === bookId) {
+                return {
+                  ...book,
+                  copies: book.copies.map((copy) => {
+                    if (copy.id === copyId) {
+                      return { ...copy, isRented: true };
+                    }
+                    return copy;
+                  }),
+                };
+              } else {
+                return book;
+              }
             });
           });
         }
@@ -69,7 +73,7 @@ function Books() {
                 <button
                   style={{ backgroundColor: copy.isRented ? "gray" : "" }}
                   className="bg-blue-500 text-white px-4 py-2 shadow-sm rounded-md"
-                  onClick={() => handleRent(copy.id)}
+                  onClick={() => handleRent(copy.id, book.id)}
                   disabled={copy.isRented}
                 >
                   {copy.isRented ? "Already Rented" : "Rent"}
