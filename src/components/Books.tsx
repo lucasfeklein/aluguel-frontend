@@ -62,7 +62,7 @@ function Books() {
   }
 
   return (
-    <div className="w-screen flex flex-wrap justify-center gap-4 mt-10">
+    <div className="flex flex-wrap justify-between gap-4 mt-10 w-[90%] mx-auto">
       {books?.map((book) => (
         <div
           key={book.id}
