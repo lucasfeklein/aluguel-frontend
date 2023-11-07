@@ -1,6 +1,6 @@
-import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../axiosConfig";
 
 type Person = {
   pin: string;
@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: any }) {
   const navigate = useNavigate();
 
   const handleLogin = async (pin: string) => {
-    const response = await axios.post("http://localhost:3000/auth", {
+    const response = await api.post("/auth/", {
       pin,
     });
     const { token, person } = response.data;

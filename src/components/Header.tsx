@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import api from "../axiosConfig";
 import { useAuth } from "./AuthContext";
 
 function Header() {
@@ -11,7 +11,7 @@ function Header() {
     const fetchData = async () => {
       if (token) {
         try {
-          const response = await axios.get("http://localhost:3000/person/", {
+          const response = await api.get("/person/", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../axiosConfig";
 import { useAuth } from "./AuthContext";
 
 type BooksType = {
@@ -17,7 +17,7 @@ function Books() {
 
   useEffect(() => {
     async function getBooks() {
-      const response = await axios("http://localhost:3000/book/");
+      const response = await api("/book/");
       setBooks(response.data);
     }
     getBooks();
@@ -28,8 +28,8 @@ function Books() {
 
     try {
       if (token) {
-        const response = await axios.post(
-          "http://localhost:3000/copy/rentcopy/",
+        const response = await api.post(
+          "/copy/rentcopy/",
           {
             copyId,
           },
