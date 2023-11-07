@@ -3,15 +3,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
-type BooksType = [
-  {
-    id: string;
-    title: string;
-    author: string;
-    isbn: string;
-    copies: { id: string; isRented: boolean }[];
-  }
-];
+type BooksType = {
+  id: string;
+  title: string;
+  author: string;
+  isbn: string;
+  copies: { id: string; isRented: boolean }[];
+}[];
 
 function Books() {
   const { person } = useAuth();
@@ -25,7 +23,6 @@ function Books() {
     getBooks();
   }, []);
 
-  console.log(books);
   async function handleRent(copyId: string) {
     const token = localStorage.getItem("token");
 
