@@ -62,39 +62,37 @@ function Books() {
   }
 
   return (
-    <div className="w-screen flex flex-col items-center gap-4 mt-10">
+    <div className="w-screen flex flex-wrap justify-center gap-4 mt-10">
       {books?.map((book) => (
         <div
           key={book.id}
-          className="border rounded-md flex w-[300px] justify-between p-4 flex-col items-center"
+          className="border rounded-md flex w-[300px] p-4 flex-col items-center"
         >
           <h2 className="mb-4">{book.title}</h2>
-          <div>
-            {book.copies.map((copy, idx) => (
-              <div
-                key={idx}
-                className="flex w-[200px] justify-between mb-4 items-center"
-              >
-                <p>Copy {idx}</p>
-                {person ? (
-                  <button
-                    style={{ backgroundColor: copy.isRented ? "gray" : "" }}
-                    className="bg-blue-500 text-white px-4 py-2 shadow-sm rounded-md"
-                    onClick={() => handleRent(copy.id, book.id)}
-                    disabled={copy.isRented}
-                  >
-                    {copy.isRented ? "Already Rented" : "Rent"}
+          {book.copies.map((copy, idx) => (
+            <div
+              key={idx}
+              className="flex w-[200px] justify-between mb-4 items-center"
+            >
+              <p>Copy {idx}</p>
+              {person ? (
+                <button
+                  style={{ backgroundColor: copy.isRented ? "gray" : "" }}
+                  className="bg-blue-500 text-white px-4 py-2 shadow-sm rounded-md"
+                  onClick={() => handleRent(copy.id, book.id)}
+                  disabled={copy.isRented}
+                >
+                  {copy.isRented ? "Already Rented" : "Rent"}
+                </button>
+              ) : (
+                <Link to="/login">
+                  <button className="bg-blue-500 text-white px-4 py-2 shadow-sm rounded-md">
+                    Login to Rent
                   </button>
-                ) : (
-                  <Link to="/login">
-                    <button className="bg-blue-500 text-white px-4 py-2 shadow-sm rounded-md">
-                      Login to Rent
-                    </button>
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
+                </Link>
+              )}
+            </div>
+          ))}
         </div>
       ))}
     </div>
