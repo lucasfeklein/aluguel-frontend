@@ -8,7 +8,11 @@ type BookType = {
   title: string;
   author: string;
   isbn: string;
-  copies: { id: string; isRented: boolean }[];
+  copies: {
+    id: string;
+    isRented: boolean;
+    rentedByPin: string;
+  }[];
 }[];
 
 function Books() {
@@ -44,7 +48,11 @@ function Books() {
                   ...book,
                   copies: book.copies.map((copy) => {
                     if (copy.id === copyId) {
-                      return { ...copy, isRented: true };
+                      return {
+                        ...copy,
+                        isRented: true,
+                        rentedByPin: person!.pin,
+                      };
                     }
                     return copy;
                   }),
@@ -82,7 +90,11 @@ function Books() {
                   onClick={() => handleRent(copy.id, book.id)}
                   disabled={copy.isRented}
                 >
-                  {copy.isRented ? "Already Rented" : "Rent"}
+                  {copy.isRented && copy.rentedByPin === person.pin
+                    ? "You Rented"
+                    : copy.isRented
+                    ? "Already rented"
+                    : "Rent"}
                 </button>
               ) : (
                 <Link to="/login">
