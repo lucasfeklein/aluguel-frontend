@@ -64,8 +64,9 @@ function Books() {
           });
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      alert(error.response.data.error);
     }
   }
 
