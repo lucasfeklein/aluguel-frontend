@@ -40,7 +40,9 @@ function Header() {
 
   return (
     <div className="flex justify-around items-center">
-      <p>logo</p>
+      <Link to="/">
+        <p>logo</p>
+      </Link>
       {person?.name ? (
         <div className="flex gap-4 items-center">
           <div className="relative">
