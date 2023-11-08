@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import api from "../axiosConfig";
 
 function Register() {
   const [personInfo, setPersonInfo] = useState({
@@ -16,10 +17,19 @@ function Register() {
     setPersonInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
   }
 
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const response = await api.post("/person/register", { ...personInfo });
+  }
+
   return (
     <div className="flex flex-col gap-4 justify-center items-center mt-[100px]">
       <h1>Register</h1>
-      <form className="w-[300px] flex flex-col gap-2">
+      <form
+        className="w-[300px] flex flex-col gap-2"
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <div>
           <label className="flex justify-between">
             PIN:{" "}
@@ -29,6 +39,7 @@ function Register() {
               name="pin"
               value={pin}
               onChange={handleInput}
+              required
             />
           </label>
         </div>
@@ -41,6 +52,7 @@ function Register() {
               name="name"
               value={name}
               onChange={handleInput}
+              required
             />
           </label>
         </div>
@@ -53,6 +65,7 @@ function Register() {
               name="birthday"
               value={birthday}
               onChange={handleInput}
+              required
             />
           </label>
         </div>
@@ -65,6 +78,7 @@ function Register() {
               name="address"
               value={address}
               onChange={handleInput}
+              required
             />
           </label>
         </div>
