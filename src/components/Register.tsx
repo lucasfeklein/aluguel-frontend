@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../axiosConfig";
 
 function Register() {
@@ -11,6 +12,8 @@ function Register() {
 
   const { name, pin, address, birthday } = personInfo;
 
+  const navigate = useNavigate();
+
   function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
 
@@ -21,6 +24,11 @@ function Register() {
     e.preventDefault();
 
     const response = await api.post("/person/register", { ...personInfo });
+
+    if (response.status === 201) {
+      alert("Registration successful");
+      navigate("/login");
+    }
   }
 
   return (
