@@ -47,7 +47,11 @@ function Header() {
 
             {toggleDropdown && (
               <div className="absolute bg-gray-200 w-[70px]">
-                <button>My rents</button>
+                <Link to="/myrentals">
+                  <button onClick={() => setToggleDropdown(false)}>
+                    My rents
+                  </button>
+                </Link>
               </div>
             )}
           </div>
