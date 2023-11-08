@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 function Register() {
   const [personInfo, setPersonInfo] = useState({
@@ -10,7 +10,11 @@ function Register() {
 
   const { name, pin, address, birthday } = personInfo;
 
-  function handleInput(e: any) {}
+  function handleInput(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
+    setPersonInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+  }
 
   return (
     <div className="flex flex-col gap-4 justify-center items-center mt-[100px]">
