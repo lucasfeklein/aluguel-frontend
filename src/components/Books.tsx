@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import api from "../axiosConfig";
 import { useAuth } from "./AuthContext";
 
-type BooksType = {
+type BookType = {
   id: string;
   title: string;
   author: string;
@@ -13,7 +13,7 @@ type BooksType = {
 
 function Books() {
   const { person } = useAuth();
-  const [books, setBooks] = useState<BooksType | undefined>(undefined);
+  const [books, setBooks] = useState<BookType | undefined>(undefined);
 
   useEffect(() => {
     async function getBooks() {
