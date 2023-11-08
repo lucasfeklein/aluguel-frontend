@@ -19,11 +19,24 @@ function MyRentals() {
 
   async function handleReturnBook(copyId: string) {
     const token = localStorage.getItem("token");
-    const response = api.put(
+    const response = await api.put(
       "/copy/returncopy",
       { copyId },
       { headers: { Authorization: `Bearer ${token}` } }
     );
+
+    if (response.status === 200) {
+      setBooks((prevBooks) => {
+        return prevBooks
+          ?.map((book) => {
+            return {
+              ...book,
+              copies: book.copies.filter((copy) => copy.id !== copyId),
+            };
+          })
+          .filter((book) => book.copies.length > 0);
+      });
+    }
   }
 
   useEffect(() => {
