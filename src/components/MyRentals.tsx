@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../axiosConfig";
+import { useAuth } from "./AuthContext";
 
 type BookType = {
   id: string;
@@ -12,8 +13,18 @@ type BookType = {
 
 function MyRentals() {
   const navigate = useNavigate();
+  const { person } = useAuth();
 
   const [books, setBooks] = useState<BookType | undefined>(undefined);
+
+  async function handleReturnBook(copyId: string) {
+    const token = localStorage.getItem("token");
+    const response = api.put(
+      "/copy/returncopy",
+      { copyId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
 
   useEffect(() => {
     async function getMyRentals() {
@@ -48,7 +59,10 @@ function MyRentals() {
               {book.copies.map((copy) => (
                 <div key={copy.id}>
                   <p>Copy code: {copy.id}</p>
-                  <button className="bg-blue-500 text-white px-4 py-2 shadow-sm rounded-md">
+                  <button
+                    onClick={() => handleReturnBook(copy.id)}
+                    className="bg-blue-500 text-white px-4 py-2 shadow-sm rounded-md"
+                  >
                     Return
                   </button>
                 </div>
