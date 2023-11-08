@@ -48,11 +48,18 @@ function Header() {
           </button>
         </div>
       ) : (
-        <Link to="/login">
-          <button className="bg-blue-400 text-white rounded-md px-4 py-2">
-            Login
-          </button>
-        </Link>
+        <div className="flex gap-4">
+          <Link to="/login">
+            <button className="bg-blue-400 text-white rounded-md px-4 py-2">
+              Login
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className="bg-blue-400 text-white rounded-md px-4 py-2">
+              Register
+            </button>
+          </Link>
+        </div>
       )}
     </div>
   );
