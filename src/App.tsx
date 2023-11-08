@@ -9,7 +9,8 @@ function App() {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Books />} />
+        <Route path="/" element={<Books onlyRentals={false} />} />
+        <Route path="/myrents" element={<Books onlyRentals={true} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

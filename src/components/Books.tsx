@@ -11,7 +11,11 @@ type BooksType = {
   copies: { id: string; isRented: boolean }[];
 }[];
 
-function Books() {
+type BooksProps = {
+  onlyRentals: boolean;
+};
+
+function Books({ onlyRentals }: BooksProps) {
   const { person } = useAuth();
   const [books, setBooks] = useState<BooksType | undefined>(undefined);
 
