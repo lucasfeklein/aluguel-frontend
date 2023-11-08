@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../axiosConfig";
-import { useAuth } from "./AuthContext";
 
 type BookType = {
   id: string;
@@ -11,22 +11,27 @@ type BookType = {
 }[];
 
 function MyRentals() {
-  const { person } = useAuth();
+  const navigate = useNavigate();
 
   const [books, setBooks] = useState<BookType | undefined>(undefined);
 
   useEffect(() => {
     async function getMyRentals() {
-      const token = localStorage.getItem("token");
-      const response = await api("/book/myrentals", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      try {
+        const token = localStorage.getItem("token");
+        const response = await api("/book/myrentals", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-      const filteredBooks = response.data.filter(
-        (book: any) => book.copies.length > 0
-      );
+        const filteredBooks = response.data.filter(
+          (book: any) => book.copies.length > 0
+        );
 
-      setBooks(filteredBooks);
+        setBooks(filteredBooks);
+      } catch (error) {
+        console.error("Error fetching my rentals:", error);
+        navigate("/");
+      }
     }
 
     getMyRentals();

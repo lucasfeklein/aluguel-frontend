@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../axiosConfig";
 import { useAuth } from "./AuthContext";
 
 function Header() {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const { person, setPerson } = useAuth();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -33,6 +35,7 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setPerson(undefined);
+    navigate("/");
   };
 
   return (
