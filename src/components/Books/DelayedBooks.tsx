@@ -39,20 +39,23 @@ function DelayedBooks() {
   console.log(delayedBooks);
   return (
     <div className="w-[90%] mx-auto mt-5">
-      <h2 className="text-lg font-bold">
+      <h2 className="text-lg font-bold mb-4">
         Top 3 Delayed Books per Month in {currentYear}
       </h2>
       <div className="flex gap-4 flex-wrap">
-        {delayedBooks?.map(([month, books], idx) => (
-          <div key={idx} className="border w-[250px]">
-            <p className="font-bold">{monthDictionary[month.slice(5)]}</p>
-            <div>
-              {books.map((book) => (
-                <p>{book.bookTitle}</p>
-              ))}
-            </div>
-          </div>
-        ))}
+        {delayedBooks?.map(
+          ([month, books], idx) =>
+            books.length > 0 && (
+              <div key={idx} className="border w-[250px]">
+                <p className="font-bold">{monthDictionary[month.slice(5)]}</p>
+                <div>
+                  {books.map((book) => (
+                    <p>{book.bookTitle}</p>
+                  ))}
+                </div>
+              </div>
+            )
+        )}
       </div>
     </div>
   );
