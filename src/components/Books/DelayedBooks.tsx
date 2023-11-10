@@ -36,7 +36,6 @@ function DelayedBooks() {
     top3DelayedBooksPerMonth();
   }, []);
 
-  console.log(delayedBooks);
   return (
     <div className="w-[90%] mx-auto mt-5">
       <h2 className="text-lg font-bold mb-4">
