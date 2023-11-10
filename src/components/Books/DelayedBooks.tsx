@@ -49,7 +49,7 @@ function DelayedBooks() {
                 <p className="font-bold">{monthDictionary[month.slice(5)]}</p>
                 <div>
                   {books.map((book) => (
-                    <p>{book.bookTitle}</p>
+                    <p key={book.bookTitle}>{book.bookTitle}</p>
                   ))}
                 </div>
               </div>
