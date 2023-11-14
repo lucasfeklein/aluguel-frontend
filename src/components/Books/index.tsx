@@ -73,7 +73,7 @@ function Books() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-4 mt-10 mx-auto justify-center">
+      <div className="flex flex-wrap gap-4 mt-10 justify-center">
         {books?.map((book) => (
           <div
             key={book.id}
