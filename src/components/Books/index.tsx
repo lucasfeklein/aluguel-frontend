@@ -72,14 +72,14 @@ function Books() {
   }
 
   return (
-    <div>
-      <div className="flex flex-wrap justify-between gap-4 mt-10 w-[90%] mx-auto">
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-wrap gap-4 mt-10 mx-auto justify-center">
         {books?.map((book) => (
           <div
             key={book.id}
             className="border rounded-md flex w-[300px] p-4 flex-col items-center"
           >
-            <h2 className="mb-4">{book.title}</h2>
+            <h2 className="mb-4 text-center">{book.title}</h2>
             {book.copies.map((copy, idx) => (
               <div
                 key={idx}
