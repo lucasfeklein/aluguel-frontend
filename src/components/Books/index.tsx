@@ -22,7 +22,7 @@ function Books() {
 
   useEffect(() => {
     async function getBooks() {
-      const response = await api("/book/");
+      const response = await api("/book");
       setBooks(response.data);
     }
     getBooks();
