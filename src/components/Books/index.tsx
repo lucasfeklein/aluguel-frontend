@@ -73,11 +73,18 @@ function Books() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-4 mt-10 justify-center">
+      <div
+        className="mt-10 w-[80%] mx-auto"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "20px",
+        }}
+      >
         {books?.map((book) => (
           <div
             key={book.id}
-            className="border rounded-md flex w-[300px] p-4 flex-col items-center"
+            className="border rounded-md flex p-4 flex-col items-center"
           >
             <h2 className="mb-4 text-center">{book.title}</h2>
             {book.copies.map((copy, idx) => (
