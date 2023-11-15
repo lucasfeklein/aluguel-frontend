@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../axiosConfig";
-import { useAuth } from "./AuthContext";
 
 type BookType = {
   id: string;
@@ -13,7 +12,6 @@ type BookType = {
 
 function MyRentals() {
   const navigate = useNavigate();
-  const { person } = useAuth();
 
   const [books, setBooks] = useState<BookType | undefined>(undefined);
 
